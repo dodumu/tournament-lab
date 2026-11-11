@@ -1,3 +1,6 @@
+import copy
+import random
+
 from tournament.validation import(
     MAX_TEAMS,
     MIN_TEAMS,
@@ -53,3 +56,14 @@ def record_result(fixtures, fixture_id, home_score, away_score):
     fixture["away_score"] = away_score
     fixture["status"] = STATUS_PLAYED
     return fixture
+
+
+def simulate_demo_fixtures(fixtures, seed):
+    generator = random.Random(seed)
+    simulated = copy.deepcopy(fixtures)
+    for fixture in simulated:
+        if fixture["status"] == STATUS_PENDING:
+            home_score = generator.randint(0, 4)
+            away_score = generator.randint(0, 4)
+            record_result(simulated, fixture["id"], home_score, away_score)
+    return simulated

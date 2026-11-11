@@ -3,8 +3,10 @@ from tournament.standings import compute_standings, get_champion, is_league_comp
 from tournament.storage import load_league, save_league
 from tournament.teams import list_teams, register_team, team_names_by_id
 from tournament.validation import ValidationError, parse_score_text
+from tournament.fixtures import generate_fixtures, record_result, simulate_demo_fixtures
 
 DEFAULT_SAVE_FILE = "league.json"
+DEMO_SEED = 42
 
 MENU = """
 === TournamentLab ===
@@ -17,6 +19,7 @@ MENU = """
  7) Save
  8) Load
  9) Show champion
+ 10) Simulate League
  0) Quit"""
 
 
@@ -115,6 +118,20 @@ def action_champion(state):
         print(f"Champion: {champion['name']} with {champion['points']} points!")
 
 
+def action_simulate(state):
+    if not state["fixtures"]:
+        print("Error: no fixtures yet. Generate the schedule first.")
+        return
+    answer = input(
+        f"This fills ALL pending games with fake scores (seed {DEMO_SEED}). "
+        "Type YES to confirm: "
+    )
+    if answer.strip() != "YES":
+        print("Cancelled. Nothing was changed.")
+        return
+    state["fixtures"] = simulate_demo_fixtures(state["fixtures"], DEMO_SEED)
+    print("Demo scores filled in.")
+
 ACTIONS = {
     "1": action_register,
     "2": action_list_teams,
@@ -125,7 +142,9 @@ ACTIONS = {
     "7": action_save,
     "8": action_load,
     "9": action_champion,
+    "10": action_simulate,
 }
+
 
 
 def run():

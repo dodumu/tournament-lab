@@ -1,9 +1,10 @@
 import copy
 import unittest
 
-from tests.helpers import make_fixtures
-from tournament.fixtures import record_result
+from tests.helpers import make_fixtures, make_league
+from tournament.fixtures import record_result, simulate_demo_fixtures
 from tournament.validation import ValidationError
+
 
 
 class ResultEntryTests(unittest.TestCase):
@@ -24,3 +25,14 @@ class ResultEntryTests(unittest.TestCase):
                 with self.assertRaises(ValidationError):
                     record_result(fixtures, "M001", 0, bad)
         self.assertEqual(fixtures, before)
+
+
+class SimulationTests(unittest.TestCase):
+    def test_simulation_is_seeded_and_does_not_touch_real_records(self):
+        _, fixtures = make_league()
+        before = copy.deepcopy(fixtures)
+        first = simulate_demo_fixtures(fixtures, seed=7)
+        second = simulate_demo_fixtures(fixtures, seed=7)
+        self.assertEqual(fixtures, before)
+        self.assertEqual(first, second)
+        self.assertTrue(all(fixture["status"] == "played" for fixture in first))
