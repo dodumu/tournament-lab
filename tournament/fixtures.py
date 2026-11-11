@@ -43,7 +43,7 @@ def find_fixtures(fixtures, fixture_id):
     raise ValidationError(f"Unknown fixture '{fixture_id}'.")
 
 def record_result(fixtures, fixture_id, home_score, away_score):
-    fixture = find_fixtures(fixture, fixture_id)
+    fixture = find_fixtures(fixtures, fixture_id)
     if fixture["status"] != STATUS_PENDING:
         raise ValidationError(f"Fixture {fixture_id} has already been played.")
     validate_score(home_score)

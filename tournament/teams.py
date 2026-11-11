@@ -14,3 +14,7 @@ def register_team(teams, name):
 
 def list_teams(teams):
     return [f"{team['id']} {team['name']}" for team in teams]
+
+
+def team_names_by_id(teams):
+    return {team["id"]: team["name"] for team in teams}

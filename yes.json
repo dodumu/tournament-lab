@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "teams": [
+    {
+      "id": "TM001",
+      "name": "PythonFc"
+    },
+    {
+      "id": "TM002",
+      "name": "Thunder"
+    },
+    {
+      "id": "TM003",
+      "name": "Code-Titans"
+    },
+    {
+      "id": "TM004",
+      "name": "Talent FC"
+    }
+  ],
+  "fixtures": [
+    {
+      "id": "M001",
+      "home_id": "TM001",
+      "away_id": "TM002",
+      "status": "pending",
+      "home_score": null,
+      "away_score": null
+    },
+    {
+      "id": "M002",
+      "home_id": "TM001",
+      "away_id": "TM003",
+      "status": "pending",
+      "home_score": null,
+      "away_score": null
+    },
+    {
+      "id": "M003",
+      "home_id": "TM001",
+      "away_id": "TM004",
+      "status": "pending",
+      "home_score": null,
+      "away_score": null
+    },
+    {
+      "id": "M004",
+      "home_id": "TM002",
+      "away_id": "TM003",
+      "status": "pending",
+      "home_score": null,
+      "away_score": null
+    },
+    {
+      "id": "M005",
+      "home_id": "TM002",
+      "away_id": "TM004",
+      "status": "pending",
+      "home_score": null,
+      "away_score": null
+    },
+    {
+      "id": "M006",
+      "home_id": "TM003",
+      "away_id": "TM004",
+      "status": "pending",
+      "home_score": null,
+      "away_score": null
+    }
+  ]
+}
